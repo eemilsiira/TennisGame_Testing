@@ -48,6 +48,71 @@ public class TennisGameTest {
 		// Assert
 		assertEquals("Tie score incorrect", "deuce", score);		
 	}
+
+	 @Test
+	    public void testTennisGame_Player1Wins() throws TennisGameException {
+	        // Arrange
+	        TennisGame game = new TennisGame();
+	        game.player1Scored();
+	        game.player1Scored();
+	        game.player1Scored();
+	        game.player1Scored(); // Player 1 voittaa.
+	        // Act
+	        String score = game.getScore();
+	        // Assert
+	        assertEquals("Player 1 winning scenario failed", "player1 wins", score);
+	    }
+
+	    // Testataan tilanne, jossa Player 2 voittaa pelin.
+	    @Test
+	    public void testTennisGame_Player2Wins() throws TennisGameException {
+	        // Arrange
+	        TennisGame game = new TennisGame();
+	        game.player2Scored();
+	        game.player2Scored();
+	        game.player2Scored();
+	        game.player2Scored(); // Player 2 voittaa.
+	        // Act
+	        String score = game.getScore();
+	        // Assert
+	        assertEquals("Player 2 winning scenario failed", "player2 wins", score);
+	    }
+
+	    // Testataan tilanne, jossa Player 1:llä on etu.
+	    @Test
+	    public void testTennisGame_Player1Advantage() throws TennisGameException {
+	        // Arrange
+	        TennisGame game = new TennisGame();
+	        game.player1Scored();
+	        game.player1Scored();
+	        game.player1Scored();
+	        game.player2Scored();
+	        game.player2Scored();
+	        game.player2Scored(); // Molemmat saavuttavat deucen.
+	        game.player1Scored(); // Player 1 saa edun.
+	        // Act
+	        String score = game.getScore();
+	        // Assert
+	        assertEquals("Player 1 advantage scenario failed", "player1 has advantage", score);
+	    }
+
+	    // Testataan tilanne, jossa Player 2:lla on etu.
+	    @Test
+	    public void testTennisGame_Player2Advantage() throws TennisGameException {
+	        // Arrange
+	        TennisGame game = new TennisGame();
+	        game.player1Scored();
+	        game.player1Scored();
+	        game.player1Scored();
+	        game.player2Scored();
+	        game.player2Scored();
+	        game.player2Scored(); // Molemmat saavuttavat deucen.
+	        game.player2Scored(); // Player 2 saa edun.
+	        // Act
+	        String score = game.getScore();
+	        // Assert
+	        assertEquals("Player 2 advantage scenario failed", "player2 has advantage", score);
+	    }
 	
 	@Test (expected = TennisGameException.class)
 	public void testTennisGame_Player1WinsPointAfterGameEnded_ResultsException() throws TennisGameException {
